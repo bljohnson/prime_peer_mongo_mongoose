@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema; // schema property
 
-var assignmentSchema = new Schema ({
+var assignmentSchema = new Schema ({ // create schema/structure with field names and schema types
   student_name: String,
   assignment_number: Number,
   score: Number,

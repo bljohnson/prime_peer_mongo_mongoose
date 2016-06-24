@@ -6,7 +6,7 @@ var myApp=angular.module( 'myApp', [] );
 myApp.controller( 'assignmentController', [ '$scope', '$http', function( $scope, $http ){
   $scope.addRecord = function(){
     event.preventDefault();
-    // get the user input and store in an object
+    // get the user input and store in an object to send to server, property names we assign, object put on body of req
     var objectToSend ={
       name: $scope.studentNameIn,
       assignment: $scope.assignmentNumberIn,
@@ -24,5 +24,23 @@ myApp.controller( 'assignmentController', [ '$scope', '$http', function( $scope,
     $scope.assignmentNumberIn ='';
     $scope.scoreIn ='';
     $scope.dateIn =''; // THIS DOESN'T CLEAR YET
-  }; // end addRecord
+  }; // end addRecord function
+
+  $scope.getRecords = function(){
+     // read button clicked
+     // retrieve records via http call (GET)
+     $http({
+       method: 'GET',
+       url: '/getRecords'
+     }).then( function( response ){
+       // like an ajax success
+       // we have been sent back "response"
+       // .data is the data in the reponse
+       $scope.allTheRecords = response.data; // .data;
+       console.log( $scope.allTheRecords );
+     }), function myError( response ){
+       console.log( response.statusText );
+     };
+   }; // end getRecords
+
 }]); // end controller

@@ -13,6 +13,8 @@
       Score: <input type="text" value="" ng-model="scoreIn">
       Date Completed: <input type="number" value="" ng-model="dateIn">
       <button type="button" name="button" ng-click="addRecord()">Submit</button>
+      <button type="button" name="button" ng-click="getRecords()">Display Records</button>
+      <p ng-repeat="record in allTheRecords">{{record.student_name}} {{record.assignment_number}} {{record.score}} {{record.date_completed}}</p>
     </div>
   </body>
 </html>
