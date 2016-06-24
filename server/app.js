@@ -5,7 +5,17 @@ var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({extended:false}); // NOT SURE IF I NEED THIS FOR MONGODB.... required in order to POST (app.post)
 app.use(bodyParser.json()); // parse text as JSON to req.body
 var mongoose = require('mongoose');
-mongoose.connect('localhost:/27017/peerchallengedb'); // 27017 is default mongo port
+var Assignment = require('../models/studentassignments'); // require model
+// mongoose.connect('localhost:/27017/peerchallengedb'); // 27017 is default mongo port
+
+var mongoURI = "mongodb://localhost:27017/assignments"; // URL to the mongo database
+var MongoDB = mongoose.connect(mongoURI).connection; // connects to db
+MongoDB.on('error', function (err) { // when connection errors out
+    console.log('mongodb connection error:', err);
+});
+MongoDB.once('open', function () { // when able to connect to db
+  console.log('mongodb connection open!');
+});
 
 // spin up server
 app.listen(3000, 'localhost', function (req, res) {
@@ -20,4 +30,56 @@ app.use(express.static('public'));
 app.get('/', function (req, res) {
   console.log('in base URL');
   res.sendFile(path.resolve('views/index.html')); // gets this path and sends to base URL as response
+});
+
+// get call
+app.get( '/getRecords', function( req, res ){
+  Assignment.find()
+  .then( function( data ){
+    res.send( data );
+  });
+});
+
+//dummy-value get route. Dummy value meaning
+//'hard coded' Millie
+// app.get('/millie', function(req, res) {
+//   var millie = new Assignment({
+//     student_name: 'Millie',
+//     assignment_number: 1,
+//     score: 60,
+//     date_completed: 2016-06-24
+//   });
+//
+//   millie.save(function(err) {
+//     if(err){
+//       console.log(err);
+//       res.sendStatus(500);
+//     }else{
+//       console.log('User saved successfully!');
+//       res.sendStatus(200);
+//     }
+//   });
+// });//end millie get route
+
+// create post route to db
+app.post('/postAssignment', function(req, res) {
+  console.log('hit create route');
+  console.log('req.body = ', req.body);
+
+  var newAssignment = new Assignment({
+    student_name: req.body.name,
+    assignment_number: req.body.assignment,
+    score: req.body.score,
+    date_completed: new Date(req.body.date)
+  });
+
+  newAssignment.save(function(err) {
+    if(err){
+      console.log(err);
+      res.sendStatus(500);
+    }else{
+      console.log('Assignment saved successfully!');
+      res.sendStatus(200);
+    }
+  });
 });

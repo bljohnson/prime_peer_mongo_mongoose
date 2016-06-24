@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Peer Challenge | MongoDB & Mongoose</title>
+    <script src="vendors/angular.min.js" charset="utf-8"></script>
+    <script src="scripts/script.js" charset="utf-8"></script>
   </head>
   <body>
-
+    <div ng-controller="assignmentController">
+      Student Name: <input type="text" value="" ng-model="studentNameIn">
+      Assignment Number: <input type="text" value="" ng-model="assignmentNumberIn">
+      Score: <input type="text" value="" ng-model="scoreIn">
+      Date Completed: <input type="number" value="" ng-model="dateIn">
+      <button type="button" name="button" ng-click="addRecord()">Submit</button>
+    </div>
   </body>
 </html>
