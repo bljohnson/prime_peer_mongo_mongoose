@@ -6,9 +6,11 @@ var mongoose = require('mongoose');
 var Assignment = require('../models/studentassignments'); // require model
 // mongoose.connect('localhost:/27017/peerchallengedb'); // 27017 is default mongo port
 
+// these two lines are same as writing above commented out line
 var mongoURI = "mongodb://localhost:27017/assignments"; // URL to the mongo database
 var MongoDB = mongoose.connect(mongoURI).connection; // connects to db
 
+// middleware
 var urlencodedParser = bodyParser.urlencoded({extended:false}); // required in order to POST (app.post)
 app.use(bodyParser.json()); // parse text as JSON to req.body
 

@@ -2,6 +2,7 @@ console.log('this works');
 
 
 var myApp=angular.module( 'myApp', [] );
+
 // create a controller
 myApp.controller( 'assignmentController', [ '$scope', '$http', function( $scope, $http ){
   $scope.addRecord = function(){
@@ -44,3 +45,9 @@ myApp.controller( 'assignmentController', [ '$scope', '$http', function( $scope,
    }; // end getRecords
 
 }]); // end controller
+
+// datePicker
+// var app = angular.module('app', ['jkuri.datepicker']);
+// myApp.controller('dateController', [function() {
+	// var self = this;
+// }]);

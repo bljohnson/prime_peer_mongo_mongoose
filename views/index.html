@@ -5,13 +5,19 @@
     <title>Peer Challenge | MongoDB & Mongoose</title>
     <script src="vendors/angular.min.js" charset="utf-8"></script>
     <script src="scripts/script.js" charset="utf-8"></script>
+    <!-- <script src="../node_modules/ng-datepicker/src/js/ngDatepicker.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../node_modules/ng-datepicker/src/css/ngDatepicker.css" media="screen" title="no title" charset="utf-8"> -->
   </head>
   <body>
     <div ng-controller="assignmentController">
       Student Name: <input type="text" value="" ng-model="studentNameIn">
       Assignment Number: <input type="text" value="" ng-model="assignmentNumberIn">
       Score: <input type="text" value="" ng-model="scoreIn">
-      Date Completed: <input type="number" value="" ng-model="dateIn">
+      Date Completed: <input type="string" value="" ng-model="dateIn" placeholder="mm/dd/yyyy"> <!--require format as mm/dd/yyyy-->
+      <!-- <div ng-controller="dateController">
+        <ng-datepicker ng-model="ctrl.date"></ng-datepicker>
+        <span ng-bind="ctrl.date" style="display: block; margin-top: 5px;"></span>
+      </div> -->
       <button type="button" name="button" ng-click="addRecord()">Submit</button>
       <button type="button" name="button" ng-click="getRecords()">Display Records</button>
       <p ng-repeat="record in allTheRecords">{{record.student_name}} {{record.assignment_number}} {{record.score}} {{record.date_completed}}</p>
